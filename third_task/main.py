@@ -10,8 +10,23 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 def main():
     db_session.global_init("db/spaceship.db")
-    add_colounists(db_session)
+    # add_colounists(db_session)
+    add_deploying_job(db_session)
     app.run()
+
+
+def add_deploying_job(db_ses):
+    job = Jobs()
+    job.team_leader = 1
+    job.job = 'deployment of residential modules 1 and 2'
+    job.work_size = 15
+    job.collaborators = '2, 3'
+    job.start_date = datetime.datetime.now()
+    job.is_finished = False
+
+    db_sess = db_ses.create_session()
+    db_sess.add(job)
+    db_sess.commit()
 
 
 def add_colounists(db_ses):
